@@ -1,21 +1,22 @@
-// src/components/NavBar.jsx
-import React from 'react';
-import CartWidget from './CartWidget';  // Importar el widget del carrito
+// src/components/Navbar.jsx
+import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const Navbar = () => {
   return (
-    <nav>
-      <div>
-        <h1>Logo de la Tienda</h1>
+    <nav className="navbar">
+      <div className="nav-links">
+        <Link to="/" className="nav-link">
+          Todos
+        </Link>
+        <Link to="/category/electronics" className="nav-link">
+          Electrónica
+        </Link>
+        <Link to="/category/clothing" className="nav-link">
+          Ropa
+        </Link>
       </div>
-      <ul>
-        <li><a href="#home">Inicio</a></li>
-        <li><a href="#catalogo">Catálogo</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-      <CartWidget />  {/* Aquí renderizamos el CartWidget */}
     </nav>
   );
 };
 
-export default NavBar;
+export default Navbar;
