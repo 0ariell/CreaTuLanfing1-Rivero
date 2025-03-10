@@ -1,5 +1,5 @@
-// src/components/ItemCount.jsx
 import { useState } from "react";
+import styles from "./ItemCount.module.css";
 
 const ItemCount = ({ stock, initial, onAdd }) => {
   const [count, setCount] = useState(initial);
@@ -13,14 +13,14 @@ const ItemCount = ({ stock, initial, onAdd }) => {
   };
 
   return (
-    <div className="item-count">
-      <div className="count-controls">
+    <div className={styles.itemCount}>
+      <div className={styles.countControls}>
         <button onClick={handleDecrement}>-</button>
         <span>{count}</span>
         <button onClick={handleIncrement}>+</button>
       </div>
       <button
-        className="add-button"
+        className={styles.addButton}
         onClick={() => onAdd(count)}
         disabled={stock === 0}
       >

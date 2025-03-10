@@ -1,0 +1,11 @@
+/* Contenedor principal del ItemListContainer */
+.container {
+  width: 100%;
+  padding: 20px;
+  background-color: #F5F5F5; /* Fondo gris claro */
+  min-height: calc(100vh - 80px); /* Altura mínima considerando un header u otros elementos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

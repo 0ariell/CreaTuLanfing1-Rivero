@@ -1,0 +1,36 @@
+.navbar {
+  background-color: #0D47A1; /* Azul intenso */
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Área para el logo */
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+/* Contenedor de los enlaces de navegación */
+.navLinks {
+  display: flex;
+  gap: 20px;
+}
+
+/* Estilo para cada enlace */
+.navLink {
+  color: #fff;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #00BCD4; /* Color acento en hover */
+}

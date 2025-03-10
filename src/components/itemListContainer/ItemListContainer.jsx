@@ -1,9 +1,9 @@
-// src/components/ItemListContainer.jsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ItemList from "./ItemList";
-import Loader from "./Loader";
-import products from "../data/products";
+import ItemList from "../itemList/ItemList";
+import Loader from "../loader/Loader";
+import products from "../../data/products";
+import styles from "./ItemListContainer.module.css";
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
@@ -24,7 +24,7 @@ const ItemListContainer = () => {
   }, [categoryId]);
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       {loading ? <Loader /> : <ItemList products={items} />}
     </div>
   );

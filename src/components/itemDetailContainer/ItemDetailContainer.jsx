@@ -1,9 +1,9 @@
-// src/components/ItemDetailContainer.jsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ItemDetail from "./ItemDetail";
-import Loader from "./Loader";
-import products from "../data/products";
+import ItemDetail from "../itemDetail/ItemDetail";
+import Loader from "../loader/Loader";
+import products from "../../data/products";
+import styles from "./ItemDetailContainer.module.css";
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState(null);
@@ -34,7 +34,11 @@ const ItemDetailContainer = () => {
 
   if (loading) return <Loader />;
 
-  return product ? <ItemDetail product={product} /> : null;
+  return (
+    <div className={styles.container}>
+      {product ? <ItemDetail product={product} /> : null}
+    </div>
+  );
 };
 
 export default ItemDetailContainer;
