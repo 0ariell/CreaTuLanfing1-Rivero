@@ -1,0 +1,31 @@
+.productsContainer {
+  padding: 2rem;
+  max-width: 1200px; /* Limita el ancho máximo */
+  margin: 0 auto; /* Centra el contenedor */
+}
+
+.filterButtons {
+  display: flex;
+  gap: 1rem; /* Espacio entre botones */
+  flex-wrap: wrap; /* Permite que se ajusten en móviles */
+  justify-content: center;
+}
+
+.filterBtn {
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #ddd;
+  border-radius: 30px; /* Bordes redondeados */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.filterBtn.active {
+  background: #ffb6c1; /* Estilo para botón activo */
+  color: white;
+}
+
+.productsGrid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem; /* Espacio entre tarjetas */
+}

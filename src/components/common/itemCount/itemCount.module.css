@@ -1,0 +1,49 @@
+/* itemCount.module.css */
+.countContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  width: fit-content;
+  background-color: #D988A9; /* Rosa polvoriento para coincidir con el botón de compra */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.count {
+  color: #FFF9FB; /* Blanco roto del contenido */
+  font-size: 1.3rem;
+  font-weight: 600;
+  width: 40px;
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #6D4A54; /* Color del título */
+  padding: 4px 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.decreaseButton:hover {
+  color: #C9738F; /* Rosa medio */
+  background-color: rgba(201, 115, 143, 0.1);
+}
+
+.increaseButton:hover {
+  color: #D988A9; /* Rosa polvoriento */
+  background-color: rgba(217, 136, 169, 0.1);
+}

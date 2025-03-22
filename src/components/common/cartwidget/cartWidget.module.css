@@ -1,0 +1,64 @@
+/* cartWidget.module.css */
+.cartContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cartIcon {
+  width: 28px;
+  height: 28px;
+  color: #2d2d2d;
+  transition: all 0.3s ease;
+}
+
+.cartContainer:hover .cartIcon {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.cartCount {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff4d6d;
+  color: white;
+  border-radius: 9999px;
+  min-width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ffc7ee;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Efecto al hacer hover en todo el contenedor */
+.cartContainer:hover {
+  transform: translateY(-1px);
+}
+
+/* Efecto para accesibilidad en focus */
+.cartContainer:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

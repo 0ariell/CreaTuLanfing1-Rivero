@@ -1,25 +1,28 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/navBar/Navbar";
-import ItemListContainer from "./components/itemListContainer/ItemListContainer";
-import ItemDetailContainer from "./components/itemDetailContainer/ItemDetailContainer";
-import NotFound from "./components/notFound/NotFound";
-import NotFoundProduct from "./components/notFoundProduct/NotFoundProduct";
-
-// Estilos globales
-import "./App.css";
+import Home from "./components/pages/home/Home";
+import Products from "./components/layout/Products/Products";
+import ProductDetail from "./components/pages/productDetail/ProductDetail";
+import Navbar from "./components/layout/navbar/Navbar";
+import Footer from "./components/layout/footer/Footer";
+import CartProvider from "./context/CartContext"; // Asegúrate de importar CartProvider
+import Cart from "./components/pages/cart/Cart";
+import SearchResults from "./components/pages/searchResults/SeachResults";
 
 function App() {
   return (
-    <div className="app-container">
+    <div className="container">
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<ItemListContainer />} />
-          <Route path="/category/:categoryId" element={<ItemListContainer />} />
-          <Route path="/item/:productId" element={<ItemDetailContainer />} />
-          <Route path="/404" element={<NotFoundProduct />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <CartProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/productos" element={<Products />} />
+            <Route path="/producto/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/buscar" element={<SearchResults  />}></Route>
+          </Routes>
+          <Footer />
+        </CartProvider>
       </BrowserRouter>
     </div>
   );

@@ -1,0 +1,144 @@
+/* Contenedor principal */
+.navBar {
+  padding: 1rem 5%;
+  background: #ffb6c1; /* Rosa principal */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #f4c2c2; /* Rosa secundario */
+}
+
+/* Logo */
+.neonText {
+  color: white;
+  width: 120px;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.neonText:hover {
+  transform: scale(1.05);
+
+}
+
+
+
+/* Contenedor de enlaces */
+.linkContainer {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* Enlaces */
+.navLink {
+  color: #f9f6f7; /* Blanco roto */
+  text-decoration: none;
+  font-weight: 600;
+  font-family: "Segoe UI", sans-serif;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #f4c2c2; /* Rosa secundario */
+  transition: width 0.3s ease;
+}
+
+.navLink:hover {
+  color: #f4c2c2; /* Rosa secundario */
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* SearchBar */
+.searchBar {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #f4c2c2; /* Rosa secundario */
+  color: #f9f6f7; /* Blanco roto */
+  transition: all 0.3s ease;
+}
+
+.searchBar:focus {
+  outline: none;
+  border-color: #f4c2c2; /* Rosa secundario */
+  box-shadow: 0 0 10px rgba(244, 194, 194, 0.5); /* Rosa secundario */
+}
+
+/* CartWidget */
+.cartWidget {
+  position: relative;
+  color: #f9f6f7; /* Blanco roto */
+  transition: transform 0.3s ease;
+}
+
+.cartWidget:hover {
+  transform: scale(1.1);
+}
+
+.cartBadge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #f4c2c2; /* Rosa secundario */
+  color: #f9f6f7; /* Blanco roto */
+  border-radius: 50%;
+  padding: 3px 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .navBar {
+    padding: 1rem 5%;
+    flex-wrap: wrap;
+  }
+
+  .linkContainer {
+    gap: 1.5rem;
+  }
+
+  .navLink {
+    font-size: 0.9rem;
+  }
+
+  .searchBar {
+    order: 3;
+    width: 100%;
+    margin: 1rem 0 0 0;
+  }
+}
+
+@keyframes flicker {
+  0% { text-shadow: 0 0 5px #ffe3e7, 0 0 10px #ffe3e7, 0 0 15px #ffe3e7; }
+  50% { text-shadow: 0 0 8px #ffe3e7, 0 0 18px #ffe3e7, 0 0 25px #ffe3e7; }
+  100% { text-shadow: 0 0 5px #ffe3e7, 0 0 10px #ffe3e7, 0 0 15px #ffe3e7; }
+}
+
+.neonText {
+  animation: flicker 1.5s infinite alternate ease-in-out;
+}

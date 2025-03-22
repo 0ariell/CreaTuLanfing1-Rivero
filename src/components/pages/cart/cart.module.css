@@ -1,0 +1,142 @@
+/* cart.module.css */
+.cartPageContainer {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cartPageTitle {
+  text-align: center;
+  color: #2d2d2d;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.cartPageTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff8cd9 0%, #ffc7ee 100%);
+}
+
+.cartPageItem {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cartPageItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cartPageItemImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cartPageItemDetails {
+  flex-grow: 1;
+}
+
+.cartPageItemDetails h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2d2d2d;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.cartPageItemDetails p {
+  margin: 0.3rem 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.cartPageShopButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem auto 0;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, #ff8cd9 0%, #ffc7ee 100%);
+  color: #2d2d2d;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cartPageShopButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cartPageButton {
+  padding: 0.5rem 1rem;
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.cartPageButton:hover {
+  background: #ff3355;
+  transform: scale(1.05);
+}
+
+.cartPageEmpty {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.cartPageEmpty p {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .cartPageContainer {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .cartPageItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cartPageItemImage {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .cartPageButton {
+    width: 100%;
+  }
+}
