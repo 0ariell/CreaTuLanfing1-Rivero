@@ -6,25 +6,31 @@ import styles from "./searchBar.module.css";
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
 
-  const handleKeyPress = (e) => {
-    if(e.key === "Enter") {
-      handleSearch()
-    }
-  }
-
   const handleSearch = () => {
-    if (searchText.trim()) {
-      navigate(`/buscar?query=${searchText}`);
+    if (!searchText.trim()) {
+      setIsError(true);
+      setTimeout(() => setIsError(false), 400);
+      return;
     }
+
+    setIsSearching(true);
+    navigate(`/buscar?query=${searchText}`);
+    setTimeout(() => setIsSearching(false), 1000);
   };
 
   return (
-    <div className={styles.containerSearch}>
+    <div
+      className={`${styles.containerSearch} ${
+        isSearching ? styles.searching : ""
+      }`}
+    >
       <input
-        className={styles.searchBar}
-        onKeyDown={handleKeyPress}
+        className={`${styles.searchBar} ${isError ? styles.error : ""}`}
+        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
         type="text"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}

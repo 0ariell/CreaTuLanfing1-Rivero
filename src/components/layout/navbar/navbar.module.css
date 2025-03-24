@@ -1,144 +1,224 @@
-/* Contenedor principal */
 .navBar {
   padding: 1rem 5%;
-  background: #ffb6c1; /* Rosa principal */
+  background: rgba(255, 182, 193, 0.9); /* Rosa con transparencia */
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(255, 77, 109, 0.15);
   position: sticky;
   top: 0;
   z-index: 1000;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #f4c2c2; /* Rosa secundario */
+  backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid rgba(244, 194, 194, 0.3);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Logo */
+/* Logo con efecto neon mejorado */
 .neonText {
-  color: white;
-  width: 120px;
-  transition: transform 0.3s ease;
+  color: var(--text-light);
+  width: 140px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   align-items: center;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  filter: drop-shadow(0 4px 8px rgba(255, 77, 109, 0.3));
 }
 
 .neonText:hover {
-  transform: scale(1.05);
-
+  transform: scale(1.08) rotate(-2deg);
 }
 
+/* Animación neon mejorada */
+@keyframes flicker {
+  0% { 
+    text-shadow: 0 0 8px var(--text-light),
+                 0 0 16px rgba(255, 255, 255, 0.4),
+                 0 0 24px rgba(255, 77, 109, 0.3);
+  }
+  50% { 
+    text-shadow: 0 0 12px var(--text-light),
+                 0 0 24px rgba(255, 255, 255, 0.6),
+                 0 0 32px rgba(255, 77, 109, 0.5);
+  }
+  100% { 
+    text-shadow: 0 0 8px var(--text-light),
+                 0 0 16px rgba(255, 255, 255, 0.4),
+                 0 0 24px rgba(255, 77, 109, 0.3);
+  }
+}
 
-
-/* Contenedor de enlaces */
+/* Enlaces con efecto 3D */
 .linkContainer {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 3rem;
+  position: relative;
 }
 
-/* Enlaces */
 .navLink {
-  color: #f9f6f7; /* Blanco roto */
+  color: var(--text-light);
   text-decoration: none;
   font-weight: 600;
-  font-family: "Segoe UI", sans-serif;
+  font-family: 'Inter', sans-serif;
   position: relative;
-  padding: 0.5rem 0;
-  transition: all 0.3s ease;
+  padding: 0.8rem 0;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+}
+
+.navLink::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 77, 109, 0.8) 100%);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .navLink::after {
-  content: "";
+  content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #f4c2c2; /* Rosa secundario */
-  transition: width 0.3s ease;
+  width: 12px;
+  height: 12px;
+  bottom: -5px;
+  left: 50%;
+  background: var(--text-light);
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: blur(1px);
 }
 
 .navLink:hover {
-  color: #f4c2c2; /* Rosa secundario */
+  color: var(--text-light);
+  transform: translateY(-2px);
+}
+
+.navLink:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .navLink:hover::after {
-  width: 100%;
+  transform: translateX(-50%) scale(1);
 }
 
-/* SearchBar */
+/* SearchBar con efecto vidrio */
 .searchBar {
   flex: 1;
-  max-width: 500px;
-  margin: 0 2rem;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  border: 1px solid #f4c2c2; /* Rosa secundario */
-  color: #f9f6f7; /* Blanco roto */
-  transition: all 0.3s ease;
+  max-width: 600px;
+  margin: 0 3rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  padding: 0.8rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-light);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  backdrop-filter: blur(8px);
 }
 
 .searchBar:focus {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 20px rgba(255, 77, 109, 0.3);
   outline: none;
-  border-color: #f4c2c2; /* Rosa secundario */
-  box-shadow: 0 0 10px rgba(244, 194, 194, 0.5); /* Rosa secundario */
+  padding: 0.8rem 2.5rem;
 }
 
-/* CartWidget */
+.searchBar::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+}
+
+/* CartWidget premium */
 .cartWidget {
   position: relative;
-  color: #f9f6f7; /* Blanco roto */
-  transition: transform 0.3s ease;
+  color: var(--text-light);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  perspective: 1000px;
 }
 
 .cartWidget:hover {
-  transform: scale(1.1);
+  transform: rotateY(15deg) scale(1.1);
 }
 
 .cartBadge {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #f4c2c2; /* Rosa secundario */
-  color: #f9f6f7; /* Blanco roto */
-  border-radius: 50%;
-  padding: 3px 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  top: -10px;
+  right: -12px;
+  background: var(--accent);
+  color: var(--text-light);
+  border-radius: 50px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(255, 77, 109, 0.3);
+  animation: pulseBadge 2s infinite;
 }
 
-/* Mobile Responsive */
+@keyframes pulseBadge {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Mobile: Menú hamburguesa premium */
 @media (max-width: 768px) {
   .navBar {
-    padding: 1rem 5%;
-    flex-wrap: wrap;
-  }
-
-  .linkContainer {
+    padding: 1rem 7%;
     gap: 1.5rem;
   }
-
+  
+  .linkContainer {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    flex-direction: column;
+    background: rgba(255, 182, 193, 0.95);
+    backdrop-filter: blur(15px);
+    width: 70%;
+    height: calc(100vh - 70px);
+    padding: 2rem;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .linkContainer.active {
+    right: 0;
+  }
+  
   .navLink {
-    font-size: 0.9rem;
-  }
-
-  .searchBar {
-    order: 3;
+    font-size: 1.2rem;
+    padding: 1rem;
     width: 100%;
-    margin: 1rem 0 0 0;
+    text-align: center;
+    border-radius: 15px;
+  }
+  
+  .navLink:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .searchBar {
+    order: 0;
+    width: 100%;
+    margin: 1rem 0;
+    max-width: none;
   }
 }
 
-@keyframes flicker {
-  0% { text-shadow: 0 0 5px #ffe3e7, 0 0 10px #ffe3e7, 0 0 15px #ffe3e7; }
-  50% { text-shadow: 0 0 8px #ffe3e7, 0 0 18px #ffe3e7, 0 0 25px #ffe3e7; }
-  100% { text-shadow: 0 0 5px #ffe3e7, 0 0 10px #ffe3e7, 0 0 15px #ffe3e7; }
-}
-
-.neonText {
-  animation: flicker 1.5s infinite alternate ease-in-out;
+/* Efecto de scroll */
+.scrolledNav {
+  background: rgba(255, 182, 193, 0.7);
+  box-shadow: 0 4px 20px rgba(255, 77, 109, 0.1);
+  padding: 0.8rem 5%;
 }

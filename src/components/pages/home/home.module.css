@@ -1,0 +1,317 @@
+/* Home.module.css */
+
+:root {
+  --baby-pink: #FFF0F3;
+  --soft-pink: #FFDEE5;
+  --dark-pink: #FF758F;
+  --text-dark: #3A3A3A;
+  --text-light: #FFFFFF;
+  --accent: #FF4D6D;
+  --glass: rgba(255, 255, 255, 0.15);
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* Base Styles */
+.homeContainer {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Hero Section - Premium Version */
+.heroSection {
+  background: linear-gradient(135deg, 
+    hsl(348, 100%, 97%) 0%, 
+    hsl(345, 100%, 94%) 100%);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+
+.heroContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  width: 100%;
+}
+
+.heroTitle {
+  font-size: 4.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  line-height: 1.1;
+  max-width: 800px;
+  position: relative;
+  background: linear-gradient(to right, var(--text-dark), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: slideIn 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.heroSubtitle {
+  font-size: 1.75rem;
+  margin-bottom: 3rem;
+  color: var(--text-dark);
+  opacity: 0.9;
+  max-width: 600px;
+  font-weight: 300;
+  animation: fadeInUp 1s 0.3s both;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Featured Products - Premium Grid */
+.featuredSection {
+  padding: 8rem 2rem;
+  background: var(--baby-pink);
+  position: relative;
+  z-index: 1;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Advanced Product Card */
+.productCard {
+  background: var(--text-light);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.productCard:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.productCard:hover .productImage {
+  transform: scale(1.05);
+}
+
+.productImage {
+  height: 350px;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Categories Banner - Glassmorphism Effect */
+.categoriesSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: 6rem 2rem;
+  background: linear-gradient(
+    45deg,
+    var(--baby-pink) 0%,
+    var(--soft-pink) 100%
+  );
+  margin: 6rem 0;
+  position: relative;
+}
+
+.categoryCard {
+  min-height: 500px;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass);
+  box-shadow: var(--shadow);
+}
+
+/* Newsletter - Curved Design */
+.newsletterSection {
+  padding: 8rem 2rem;
+  background: var(--dark-pink);
+  position: relative;
+  clip-path: ellipse(120% 100% at 50% 0%);
+  margin-top: -8rem;
+}
+
+.newsletterContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.emailInput {
+  padding: 1.2rem 2rem;
+  border: 2px solid var(--text-light);
+  background: transparent;
+  color: var(--text-light);
+  border-radius: 50px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.emailInput::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.emailInput:focus {
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+/* Advanced Loading Skeleton */
+.loadingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.productSkeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 400% 100%;
+  border-radius: 20px;
+  height: 450px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Micro Interactions */
+.ctaButton {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.ctaButton::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.ctaButton:hover::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Responsive Design Enhancements */
+@media (max-width: 1200px) {
+  .heroTitle {
+    font-size: 3.5rem;
+  }
+  
+  .categoriesSection {
+    grid-template-columns: 1fr;
+    margin: 4rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    min-height: auto;
+    padding: 8rem 2rem;
+  }
+  
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  
+  .newsletterSection {
+    clip-path: ellipse(150% 100% at 50% 0%);
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+  
+  .productsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .categoryCard {
+    min-height: 300px;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--baby-pink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3D Parallax Effect */
+.heroSection::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('pattern.svg') repeat;
+  opacity: 0.1;
+  z-index: 1;
+  transform: translateZ(-1px) scale(1.2);
+}

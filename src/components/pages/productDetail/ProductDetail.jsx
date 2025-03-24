@@ -1,32 +1,66 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import products from "../../data/products";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebaseConfig";
 import { CartContext } from "../../../context/CartContext";
 import styles from "./productDetail.module.css";
 import ItemCount from "../../common/itemCount/ItemCount";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
+import UnsplashImg from "../../data/UnsplashImg";
 
 const ProductDetail = () => {
-  const [item, setItem] = useState(null);
+  const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { addToCart } = useContext(CartContext);
   const { id } = useParams();
 
   useEffect(() => {
-    const product = products.find((e) => e.id === Number(id));
-    setItem(product || null);
-    setQuantity(1); // Resetear cantidad al cambiar producto
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const docRef = doc(db, "products", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setProduct({
+            id: docSnap.id,
+            name: data.name,
+            price: data.price,
+            category: data.category,
+            image: data.image,
+            stock: data.stock,
+            description: data.description || "Descripción no disponible",
+          });
+        } else {
+          setError("Producto no encontrado");
+        }
+      } catch (err) {
+        console.error("Error fetching product:", err);
+        setError("Error al cargar el producto");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
   }, [id]);
 
   const handleAddToCart = () => {
-    if (!item || item.stock === 0) return;
+    if (!product || product.stock === 0) return;
 
-    if (quantity > item.stock) {
-      alert(`No hay suficiente stock. Máximo disponible: ${item.stock}`);
+    if (quantity > product.stock) {
+      alert(`No hay suficiente stock. Máximo disponible: ${product.stock}`);
       return;
     }
 
-    addToCart({ ...item, quantity });
+    addToCart({
+      ...product,
+      quantity: quantity,
+    });
+
     alert(
       `Agregaste ${quantity} ${
         quantity === 1 ? "unidad" : "unidades"
@@ -34,46 +68,65 @@ const ProductDetail = () => {
     );
   };
 
-  if (!item) return <div className={styles.loading}>Cargando producto...</div>;
+  if (loading) {
+    return <div className={styles.loading}>Cargando producto...</div>;
+  }
 
-  return (
-    <div className={styles.productDetailContainer}>
-      <div className={styles.productDetailImageContainer}>
-        <img
-          src={item.image}
-          alt={item.name}
-          className={styles.productDetailMainImage}
-        />
-      </div>
-
-      <div className={styles.productDetailContent}>
-        <h2 className={styles.productDetailName}>{item.name}</h2>
-        <p className={styles.productDetailPrice}>${item.price}</p>
-        <p className={styles.productDetailCategory}>{item.category}</p>
-        <p className={styles.productDetailDescription}>{item.description}</p>
-        <p className={styles.productDetailStock}>
-          Stock disponible: {item.stock}
-        </p>
-
-        <div className={styles.productDetailBuySection}>
-          <ItemCount item={item} setQuantity={setQuantity} />
-
-          <button
-            onClick={handleAddToCart}
-            className={styles.productDetailBuyButton}
-            disabled={item.stock === 0}
-          >
-            <ShoppingCart size={18} />
-            {item.stock === 0 ? "Sin stock" : "Añadir al carrito"}
-          </button>
-        </div>
-
+  if (error) {
+    return (
+      <div className={styles.error}>
+        <p>{error}</p>
         <Link to="/productos" className={styles.productDetailBackButton}>
           <ArrowLeft size={18} />
           Volver a productos
         </Link>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    product && (
+      <div className={styles.productDetailContainer}>
+        <div className={styles.productDetailImageContainer}>
+          <UnsplashImg productName={product.name} category={product.category} />
+        </div>
+
+        <div className={styles.productDetailContent}>
+          <h2 className={styles.productDetailName}>{product.name}</h2>
+          <p className={styles.productDetailPrice}>${product.price}</p>
+          <p className={styles.productDetailCategory}>{product.category}</p>
+          <p className={styles.productDetailDescription}>
+            {product.description}
+          </p>
+          <p className={styles.productDetailStock}>
+            Stock disponible: {product.stock}
+          </p>
+
+          <div className={styles.productDetailBuySection}>
+            <ItemCount
+              stock={product.stock}
+              initial={1}
+              onAdd={handleAddToCart}
+              setQuantity={setQuantity}
+            />
+
+            <button
+              onClick={handleAddToCart}
+              className={styles.productDetailBuyButton}
+              disabled={product.stock === 0}
+            >
+              <ShoppingCart size={18} />
+              {product.stock === 0 ? "Sin stock" : "Añadir al carrito"}
+            </button>
+          </div>
+
+          <Link to="/productos" className={styles.productDetailBackButton}>
+            <ArrowLeft size={18} />
+            Volver a productos
+          </Link>
+        </div>
+      </div>
+    )
   );
 };
 
