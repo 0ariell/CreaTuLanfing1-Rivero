@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { CartContext } from "../../../context/CartContext";
 import styles from "./productDetail.module.css";
@@ -20,20 +20,12 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const docRef = doc(db, "products", id);
+        const refCollection = collection(db, "products");
+        const docRef = doc(refCollection, id);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          const data = docSnap.data();
-          setProduct({
-            id: docSnap.id,
-            name: data.name,
-            price: data.price,
-            category: data.category,
-            image: data.image,
-            stock: data.stock,
-            description: data.description || "Descripción no disponible",
-          });
+          setProduct({ id: docSnap.id, ...docSnap.data() });
         } else {
           setError("Producto no encontrado");
         }
@@ -96,7 +88,7 @@ const ProductDetail = () => {
           <p className={styles.productDetailPrice}>${product.price}</p>
           <p className={styles.productDetailCategory}>{product.category}</p>
           <p className={styles.productDetailDescription}>
-            {product.description}
+            {product.description || "Descripción no disponible"}
           </p>
           <p className={styles.productDetailStock}>
             Stock disponible: {product.stock}

@@ -1,18 +1,15 @@
-/* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
 
 export const CartContext = createContext();
 
-const CartProvider = ({ children }) => {
+const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
-    const isProductInCart = cart.some((item) => item.id === product.id);
+    let isProductInCart = cart.some((item) => item.id === product.id);
 
-    if (!isProductInCart) {
-      setCart([...cart, { ...product, quantity: product.quantity }]);
-    } else {
-      const updatedCart = cart.map((item) =>
+    if (isProductInCart) {
+      let updatedCart = cart.map((item) =>
         item.id === product.id
           ? {
               ...item,
@@ -21,28 +18,32 @@ const CartProvider = ({ children }) => {
           : item
       );
       setCart(updatedCart);
+    } else {
+      setCart([...cart, { ...product, quantity: product.quantity }]);
     }
   };
 
-  const handleDelete = (productId) => {
-    const updatedCart = cart.map((item) =>
-      item.id === productId
-        ? {
-            ...item,
-            quantity: item.quantity - 1, // Reducimos la cantidad en lugar de eliminar
-          }
-        : item
-    );
-
-    const filteredCart = updatedCart.filter((item) => item.quantity > 0);
-    setCart(filteredCart);
-  };
+  const resetCart = () => setCart([]);
+  const removeById = (id) => setCart(cart.filter((item) => item.id !== id));
+  const getTotalAmount = () =>
+    cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const getTotalQuantity = () =>
+    cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, handleDelete }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        resetCart,
+        removeById,
+        getTotalAmount,
+        getTotalQuantity,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
 
-export default CartProvider;
+export default CartContextProvider;

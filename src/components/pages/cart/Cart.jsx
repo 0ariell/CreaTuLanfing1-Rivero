@@ -1,45 +1,43 @@
 import { useContext } from "react";
-import { CartContext } from "../../../context/CartContext";
 import { Link } from "react-router-dom";
-import styles from "./cart.module.css";
+import { CartContext } from "../../../context/CartContext";
 
 const Cart = () => {
-  const { cart, handleDelete } = useContext(CartContext);
+  const { cart, resetCart, removeById, getTotalAmount } =
+    useContext(CartContext);
+
+  let total = getTotalAmount();
 
   return (
-    <div className={styles.cartPageContainer}>
-      <h2 className={styles.cartPageTitle}>Carrito de Compras</h2>
+    <div>
+      <h1>Carrito de Compras</h1>
 
       {cart.length === 0 ? (
-        <div className={styles.cartPageEmpty}>
+        <div>
           <p>El carrito está vacío</p>
-          <Link to="/productos" className={styles.cartPageShopButton}>
-            Ir a productos
-          </Link>
+          <Link to="/productos">Ir a productos</Link>
         </div>
       ) : (
         <div>
-          {cart.map((item) => (
-            <div key={item.id} className={styles.cartPageItem}>
-              <img
-                src={item.image}
-                alt={item.name}
-                className={styles.cartPageItemImage}
-              />
-              <div className={styles.cartPageItemDetails}>
-                <h3>{item.name}</h3>
-                <p>Precio: ${item.price}</p>
-                <p>Cantidad: {item.quantity}</p>
-                <p>Total: ${item.price * item.quantity}</p>
-                <button
-                  onClick={() => handleDelete(item.id)}
-                  className={styles.cartPageButton}
-                >
-                  Eliminar
-                </button>
-              </div>
+          {cart.map((product) => (
+            <div
+              key={product.id}
+              style={{
+                border: "2px solid black",
+                padding: "10px",
+                marginBottom: "10px",
+              }}
+            >
+              <h2>{product.name}</h2>
+              <h3>Precio: ${product.price}</h3>
+              <h3>Cantidad: {product.quantity}</h3>
+              <h3>Total: ${product.price * product.quantity}</h3>
+              <button onClick={() => removeById(product.id)}>Eliminar</button>
             </div>
           ))}
+          <h2>Total a pagar: ${total}</h2>
+          <button onClick={resetCart}>Vaciar carrito</button>
+          <Link to="/checkout">Finalizar compra</Link>
         </div>
       )}
     </div>
